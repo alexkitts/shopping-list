@@ -1,12 +1,22 @@
 import React from 'react';
-import { Button, Card, Col, Row, Table } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Table,
+} from 'react-bootstrap';
 import Switch from 'react-switch';
 import { checkInclude, Ingridient, ListRecipe } from '../recipies/RecipeTypes';
+import NumericInput from 'react-numeric-input';
 
 interface RecipieStubProps {
   recipe: ListRecipe;
   selectRecipeCallback(id: number): any;
   selectIngridientCallBack(id: number, ingName: string): any;
+  changeMultiplierCallBack(id: number, mulitplier: number): any;
 }
 
 const RecipieStub = (props: RecipieStubProps) => {
@@ -18,10 +28,31 @@ const RecipieStub = (props: RecipieStubProps) => {
           <Card.Title>
             <Row>
               <Col>
-                {recipe.name} - serves {recipe.serves}
+                {recipe.name} (serves {recipe.serves})
               </Col>
               <Col>
-                <div style={{ float: 'right' }} />
+                <div style={{ float: 'right' }}>
+                  <Row>
+                    <Col sm={5}>
+                      <div style={{ float: 'right' }}>
+                        <h6>Mult:</h6>
+                      </div>
+                    </Col>
+                    <Col sm={7}>
+                      <NumericInput
+                        mobile
+                        className="form-control"
+                        value={recipe.muliplier}
+                        onChange={(number) =>
+                          props.changeMultiplierCallBack(
+                            recipe.index,
+                            number ? number : 1
+                          )
+                        }
+                      />
+                    </Col>
+                  </Row>
+                </div>
               </Col>
             </Row>
           </Card.Title>

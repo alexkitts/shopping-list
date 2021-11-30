@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "serves": {
+            "type": "integer"
+          },
+          "ingridients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "FruitVeg",
+                    "NutsHerbs",
+                    "Fridge",
+                    "Dry",
+                    "Freezer",
+                    "Other"
+                  ]
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "include": {
+                  "type": "boolean"
+                }
+              },       
+              "additionalProperties": false,
+              "required": ["name", "category", "quantity"]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": ["name", "serves", "ingridients"]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["recipes"]
+}

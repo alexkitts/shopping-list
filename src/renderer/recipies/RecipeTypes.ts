@@ -23,6 +23,7 @@ export enum Category{
  interface ListRecipe extends Recipe {
   index: number;
   selected: boolean;
+  muliplier: number
 }
 
 export const checkInclude = (ingridient: Ingridient): boolean => {

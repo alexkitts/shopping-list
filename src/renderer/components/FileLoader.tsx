@@ -15,10 +15,12 @@ const FileLoader = (props: FileLoaderProps) => {
       })
       .then((filePaths: any) => {
         const files = filePaths.filePaths;
-        console.log('files', files);
-        // fileNames is an array that contains all the selected
         if (files === undefined) {
-          alert('No file selected');
+          return;
+        }
+
+        if (files[0] === undefined) {
+          return;
         }
 
         fs.readFile(files[0], 'utf-8', (err: any, data: any) => {
@@ -26,16 +28,14 @@ const FileLoader = (props: FileLoaderProps) => {
             alert(`An error ocurred reading the file :${err.message}`);
             return;
           }
-
-          // Change how to handle the file content
-          alert(`The file content is : ${data}`);
+          props.fileJsonContestCallback(data);
         });
       });
   };
   return (
-    <p>
-      <Button onClick={getFileFromUser}>Load</Button>
-    </p>
+    <Button variant={'light'} onClick={getFileFromUser}>
+      Load Recipes
+    </Button>
   );
 };
 

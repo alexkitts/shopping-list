@@ -1,11 +1,12 @@
 import React from 'react';
-import { Container, Navbar, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Recipe } from '../recipies/RecipeTypes';
 import FileLoader from './FileLoader';
 import ShoppingList from './ShoppingList';
 
 interface HeaderProps {
   recipes: Array<Recipe>;
+  fileJsonContestCallback(data: any): void;
 }
 
 const Header = (props: HeaderProps) => {
@@ -15,8 +16,13 @@ const Header = (props: HeaderProps) => {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>Shopping list maker</Navbar.Brand>
-          <FileLoader fileJsonContestCallback={(data) => console.log(data)} />
-          <ShoppingList recipes={recipes} />
+          <div style={{ float: 'right' }}>
+            <FileLoader
+              fileJsonContestCallback={props.fileJsonContestCallback}
+            />
+            {'  '}
+            <ShoppingList recipes={recipes} />
+          </div>
         </Container>
       </Navbar>
     </Row>

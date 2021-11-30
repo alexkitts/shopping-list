@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { checkInclude, Ingridient, Recipe } from '../recipies/RecipeTypes';
+import { checkInclude, Ingridient, ListRecipe } from '../recipies/RecipeTypes';
 
 interface ShoppingListProps {
-  recipes: Array<Recipe>;
+  recipes: Array<ListRecipe>;
 }
 
 function ShoppingList(props: ShoppingListProps) {
@@ -42,10 +42,13 @@ function ShoppingList(props: ShoppingListProps) {
       );
       if (alreadyPresentIngridient) {
         // Already present in list. Add totals
-        alreadyPresentIngridient.quantity += ingToAdd.quantity;
+        alreadyPresentIngridient.quantity += ingToAdd.quantity * r.muliplier;
       } else {
         // Not present, add to list
-        list[ingToAdd.category].push(ingToAdd);
+        list[ingToAdd.category].push({
+          ...ingToAdd,
+          quantity: ingToAdd.quantity * r.muliplier,
+        });
       }
     });
   });
